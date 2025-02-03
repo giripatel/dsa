@@ -1,4 +1,4 @@
-package non_linear_data_structures;
+package non_linear_data_structures.Trees;
 
 class Node{
     int data;

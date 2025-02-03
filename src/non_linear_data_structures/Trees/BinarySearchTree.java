@@ -1,12 +1,16 @@
-package non_linear_data_structures;
+package non_linear_data_structures.Trees;
 
 class TreeNode{
     int data;
-    TreeNode left;
-    TreeNode right;
+    TreeNode leftChild;
+    TreeNode rightChild;
 
     public TreeNode(int data){
         this.data = data;
+    }
+
+    public String toString(){
+        return "value="+data;
     }
 }
 
@@ -26,8 +30,22 @@ public class BinarySearchTree {
             return;
         }
 
-        TreeNode current = node;
-        while ()
+        TreeNode current = root;
+        while (true){
+            if (value <= current.data){
+                if (current.leftChild == null){
+                    current.leftChild = node;
+                    break;
+                }
+                current = current.leftChild;
+            } else {
+                if (current.rightChild == null){
+                    current.rightChild = node;
+                    break;
+                }
+                current = current.rightChild;
+            }
+        }
     }
 
 }
