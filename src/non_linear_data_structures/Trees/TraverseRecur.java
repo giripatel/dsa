@@ -29,7 +29,7 @@ class Pair{
 }
 
 public class TraverseRecur {
-    private TNode root;
+    public TNode root;
 
     public TraverseRecur(){
         this.root = null;
@@ -86,6 +86,26 @@ public class TraverseRecur {
         System.out.println(root.data);
         preOrderTraversal(root.leftChild);
         preOrderTraversal(root.rightChild);
+    }
+
+    public void postOrderTraversal(){
+        postOrderTraversal(root);
+    }
+    private void postOrderTraversal(TNode root) {
+        if (root == null) return;;
+
+        postOrderTraversal(root.leftChild);
+        postOrderTraversal(root.rightChild);
+        System.out.println(root.data);
+    }
+    public void inOrder(){
+        inOrder(root);
+    }
+    private void inOrder(TNode root) {
+        if (root == null) return;;
+        inOrder(root.leftChild);
+        System.out.println(root.data);
+        inOrder(root.rightChild);
     }
 
     public void preOrderTraversal(){
@@ -263,6 +283,90 @@ public class TraverseRecur {
         return getDiaFast(root).dia;
     }
 
+    public void morrisTraversal(){
+        morrisTraversal(root);
+    }
+
+    // NEED REVISION
+    private void morrisTraversal(TNode root){
+        TNode current = root;
+
+        while(current != null){
+            if (current.leftChild == null){
+                System.out.println(current.data);
+                current = current.rightChild;
+            } else {
+                TNode predecessor = current.leftChild;
+
+                while (predecessor.rightChild != null && predecessor.rightChild != current){
+                    predecessor = predecessor.rightChild;
+                }
+
+                if (predecessor.rightChild == null){
+                    predecessor.rightChild = current;
+                    current = current.leftChild;
+                } else {
+                    predecessor.rightChild = null;
+                    System.out.println(current.data);
+                    current = current.rightChild;
+                }
+            }
+        }
+    }
+
+    public List<Integer> flatTree(List<Integer> list) {
+        return  flatTree(root, list);
+    }
+
+    private List<Integer> flatTree(TNode root, List<Integer> list) {
+      if(root == null) return list;
+
+      list.add(root.data);
+
+      flatTree(root.leftChild, list);
+      flatTree(root.rightChild, list);
+
+      return list;
+    }
+
+    public void morrisPreOrder(){
+        morrisPreOrder(root);
+    }
+    private void morrisPreOrder(TNode root){
+
+        while (root != null){
+
+            System.out.println(root.data);
+            if (root.leftChild == null){
+                root = root.rightChild;
+            } else {
+                TNode pred = root.leftChild;
+
+                while(pred.rightChild != null){
+                    pred = pred.rightChild;
+                }
+
+                pred.rightChild = root.rightChild;
+                root = root.leftChild;
+            }
+        }
+
+    }
+
+    public void mergeTress(TNode tree2){
+        mergeTrees(root, tree2);
+    }
+    private TNode mergeTrees(TNode root1, TNode root2) {
+        if (root1 == null)
+            return root2;
+        if (root2 == null)
+            return root1;
+
+        TNode node = new TNode(root1.data + root2.data);
+        node.leftChild = mergeTrees(root1.leftChild, root2.leftChild);
+        node.rightChild = mergeTrees(root1.rightChild, root2.rightChild);
+        return node;
+    }
     // GET DIAMETER END
     /*
     private int findMin(TNode root, int value){

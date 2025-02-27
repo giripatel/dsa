@@ -1,5 +1,7 @@
 package non_linear_data_structures.Trees;
 
+import java.util.ArrayList;
+
 public class Mian {
     public static void main(String[] args) {
         TraverseRecur tree = new TraverseRecur();
@@ -15,9 +17,18 @@ public class Mian {
 
         for (int num : arr){
             tree.insert(num);
+            t2.insert(num);
         }
-
-        System.out.println(tree.getDiaFast());
+        tree.postOrderTraversal();
+        System.out.println("-------------------");
+        tree.preOrderTraversal();
+        System.out.println("-------------------");
+        tree.inOrder();
+//        tree.mergeTress(t2.root);
+//        tree.morrisTraversal();
+//            tree.morrisPreOrder();
+//        System.out.println(tree.flatTree(new ArrayList<>()));
+//        System.out.println(tree.getDiaFast());
 //            tree.levelOrder();
 //        System.out.println(tree.levelOrder());
 //        System.out.println((tree.levelOrderTraversal()));
